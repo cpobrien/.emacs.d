@@ -10,6 +10,10 @@
 (require 'package)
 (require 'rainbow-delimiters)
 (require 'linum-relative)
+(require 'dashboard)
+
+(add-to-list 'default-frame-alist '(height . 48))
+(add-to-list 'default-frame-alist '(width . 160))
 
 ;; All mode preferences
 (scroll-bar-mode -1)
@@ -21,7 +25,10 @@
 (linum-relative-on)
 (ivy-mode)
 (evil-mode)
-(evil-set-initial-state 'markdown-mode 'emacs)
+(add-hook 'after-change-major-mode-hook 'fci-mode)
+
+(dashboard-setup-startup-hook)
+(setq dashboard-startup-banner 'logo)
 
 (setq ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -30,15 +37,16 @@
 (setq per-buffer-theme/default-theme 'base16-tomorrow-night)
 (setq per-buffer-theme/themes-alist
 	    '(((:theme . adwaita)
-	       (:modes erc-mode erc-list-menu-mode org-mode markdown-mode))
+	       (:modes dashboard-mode
+		       erc-mode
+		       erc-list-menu-mode
+		       org-mode markdown-mode))
 	      ((:theme . gruvbox-dark-hard)
 	       (:modes c-mode c++-mode))
 	      ((:theme . base16-monokai)
 	       (:modes js-mode jsx-mode))))
-(setq per-buffer-tHeme/timer-idle-delay 0.1)
+(setq per-buffer-theme/timer-idle-delay 0.1)
 (per-buffer-theme/enable)
-
-(setq explicit-shell-file-name "/usr/local/Cellar/zsh/5.3.1_1/bin/zsh")
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "C-c c") 'find-user-init-file)
@@ -46,17 +54,6 @@
 (global-set-key (kbd "C-c r") 'reload-emacs)
 (global-set-key (kbd "C-p") 'clipboard-yank)
 
-(defvar sm/fixed-font-name "SF Mono")
-(defvar sm/fixed-font-weight 'medium)
-(set-face-attribute
- 'default nil
- :family sm/fixed-font-name
- :weight sm/fixed-font-weight)
-
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
-
-(global-set-key [M-up] 'beginning-of-defun)
 (global-set-key [M-down] 'end-of-defun)
 
 (add-hook 'markdown-mode-hook 'my-markdown-hook)
@@ -65,6 +62,7 @@
 (add-hook 'org-mode-hook 'my-erc-hook)
 (add-hook 'erc-mode-hook 'my-erc-hook)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode);
+(add-hook 'dashboard-mode-hook 'turn-off-fci-mode)
 
 (defun my-markdown-hook ()
   (linum-mode 0))
@@ -78,13 +76,14 @@
 
 (defun face-mode-old-school ()
   (interactive)
-  (setq buffer-face-mode-face '(:family "Perfect DOS VGA 437" :height 145))
+  (setq buffer-face-mode-face '(:family "Perfect DOS VGA 437"
+				:height 145))
   (buffer-face-mode))
 
 (defun face-mode-variable ()
   (interactive)
-  "Set font to a variable width (proportional) fonts in current buffer"
-  (setq buffer-face-mode-face '(:family "SF Pro Text" :height 125))
+  (setq buffer-face-mode-face '(:family "SF Pro Text"
+				:height 125))
   (buffer-face-mode))
 
 (defun find-user-init-file ()
@@ -117,7 +116,7 @@
  '(fci-rule-color "#3E4451")
  '(package-selected-packages
    (quote
-    (idea-darkula-theme github-modern-theme linum-relative jsx-mode rainbow-delimiters zenburn-theme ccc bury-successful-compilation projectile gruvbox-theme colemak-evil zenburn counsel swiper ivy per-buffer-theme evil load-theme-buffer-local atom-one-dark-theme color-theme-buffer-local autodisass-java-bytecode json-mode org markdown-mode base16-theme)))
+    (dashboard resize-window fill-column-indicator clevercss idea-darkula-theme github-modern-theme linum-relative jsx-mode rainbow-delimiters zenburn-theme ccc bury-successful-compilation projectile gruvbox-theme colemak-evil zenburn counsel swiper ivy per-buffer-theme evil load-theme-buffer-local atom-one-dark-theme color-theme-buffer-local autodisass-java-bytecode json-mode org markdown-mode base16-theme)))
  '(quote (package-selected-packages (quote (base16-theme)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -132,8 +131,8 @@
         (horizontal-scroll-bars . nil)
         (vertical-scroll-bars . nil)
         (menu-bar-lines . 0)
-        (top . 50)      ;; This is overridden by my-center-frame later.
-        (left . 620)        ;; This is overridden by my-center-frame later.
+        (top . 50)      
+        (left . 620)   
         (cursor-color . "red")
         (mouse-color . "green")))
 (setq ivy-use-virtual-buffers t)
