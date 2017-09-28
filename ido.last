@@ -2,25 +2,58 @@
 
 ;; ----- ido-last-directory-list -----
 (
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/rds/mercury/proxy/" . "core/")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/rds/mercury/" . "proxy/")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/rds/" . "mercury/")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/" . "rds/")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/" . "amazon/")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/" . "src/")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/" . "RDSMercuryMySqlProxyCore/")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/" . "src/")
+ ("/Users/" . "obriecon/")
  ("/Users/obriecon/writing/" . "rons_project/")
  ("/Users/obriecon/" . "writing/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
+ "/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/rds/mercury/proxy/core/"
  "/Users/obriecon/writing/rons_project/"
 )
 
 ;; ----- ido-work-file-list -----
 (
+ "ProtocolException.java"
  "writeup.md"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/Users/obriecon/" (22986 58379 0 0) "writing/" "workspace/" "WebstormProjects/" "t/" "RubymineProjects/" "RiderProjects/" "PycharmProjects/" "Public/" "projects/" "project/" "Pictures/" "nvim-osx64/" "nvim-macos.tar.gz" "Music/" "Movies/" "Library/" "init" "IdeaProjects/" "Google Drive/" "git/" "geometry/" "frisk.zsh-theme" "EventsWebsite/" "Downloads/" "Documents/" "Desktop/" "Config" "build/" "brazil-pkg-cache/" "Applications/" "alacritty/" ".zshrc~" ".zshrc.zwc" ".zshrc.pre-oh-my-zsh" ".zshrc" ".zsh_history" ".zsh-update" ".zhistory" ".zgen/" ".zcompdump.zwc" ".zcompdump-186590d2809f-5.3.1" ".zcompdump-186590d2809f-5.2" ".zcompdump" ".yarnrc" ".wget-hsts" ".vsts/" ".vimrc_background" ".viminfo" ".vim/" ".Trash/" ".tooling/" ".templateengine/" ".subversion/" ".ssh/" ".saves/" ".rvm/" ".rustup/" ".rbenv/" ".python_history" ".pry_history" ".profile" ".post-review-cookies.txt" ".p2/" ".oracle_jre_usage/" ".oh-my-zsh/" ".npm/" ".multirust/" ".mono/" ".mkshrc" ".midway/" ".matplotlib/" ".m2/" ".local/" ".lesshst" ".ideavimrc" ".ideaquicknotes/" ".gitconfig" ".gem/" ".files/" ".emacs.d/" ".eclipse/" ".DS_Store" ".dotnet/" ".cups/" ".config/" ".cisco/" ".CFUserTextEncoding" ".ce/" ".cargo/" ".cache/" ".bashrc" ".bash_sessions/" ".bash_profile" ".bash_history" ".base16_theme" ".atom/" ".anyconnect" ".android/" ".account" "../" "./")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/rds/mercury/proxy/core/" (22969 38039 0 0) "Stats.java" "state/" "ProxyDev.java" "ProxyAws.java" "ProtocolException.java" "pools/" "network/" "mysql/" "io/" "handlers/" "EnvironmentUtils.java" "crypto/" "backend/" "alloc/" "agent/" "../" "./")
 
- ("/Users/obriecon/.emacs.d/" (22986 58431 0 0) "recentf~" "recentf" "network-security.data" "init.el~" "init.el" "ido.last~" "ido.last" "eshell/" "elpa/" "auto-save-list/" ".gitconfig" ".git/" "../" "./")
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/rds/mercury/proxy/" (22969 38039 0 0) "core/" "../" "./")
+
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/rds/mercury/" (22969 38039 0 0) "proxy/" "../" "./")
+
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/rds/" (22969 38039 0 0) "mercury/" "../" "./")
+
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/amazon/" (22969 38039 0 0) "rds/" "../" "./")
+
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/src/" (22969 38039 0 0) "io/" "amazon/" "../" "./")
+
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/RDSMercuryMySqlProxyCore/" (22969 38055 0 0) "tst/" "suppressions.xml" "src/" "README.txt" "misc/" "findbugs-filter.xml" "docs/" "configuration/" "Config" "build.xml" ".idea/" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/src/" (22969 38037 0 0) "RDSMercuryMySqlProxyCore/" "../" "./")
+
+ ("/Users/obriecon/workspace/RDSMercuryMySqlProxyCore/" (22969 38078 0 0) "src/" "release-info/" "packageInfo.bak" "packageInfo" "build/" "../" "./")
+
+ ("/Users/obriecon/workspace/" (22985 13374 0 0) "ubercart/" "SharedShoppingCartMason/" "SearchProductDataLib/" "SameDayDeliveryProgramsPolicy/" "ruby/" "RDSTools/" "RDSMercuryMySqlProxyCore/" "RDSAdmin/" "rds/" "ProductDeliveryExperienceAggregatorService/" "PrimeDataPathDefinitions/" "PrecheckoutDatapathPolicies/" "NorushRulePC/" "foo.c~" "foo.c" "Foo/" "EventsWebsite/" "conf/" "CartExperienceNexusSchemas/" "CartExperienceHorizonteWebapp/" "bar/" ".idea/" ".DS_Store" "../" "./")
+
+ ("/Users/" (22837 58713 0 0) "Shared/" "root/" "obriecon/" "admin/" ".localized" "../" "./")
+
+ ("/Users/obriecon/" (22987 61023 0 0) "writing/" "workspace/" "WebstormProjects/" "t/" "RubymineProjects/" "RiderProjects/" "PycharmProjects/" "Public/" "projects/" "project/" "Pictures/" "nvim-osx64/" "nvim-macos.tar.gz" "Music/" "Movies/" "Library/" "init" "IdeaProjects/" "Google Drive/" "git/" "geometry/" "frisk.zsh-theme" "EventsWebsite/" "eclipse-workspace/" "Downloads/" "Documents/" "Desktop/" "Config" "build/" "brazil-pkg-cache/" "Applications/" "alacritty/" ".zshrc~" ".zshrc.zwc" ".zshrc.pre-oh-my-zsh" ".zshrc" ".zsh_history" ".zsh-update" ".zhistory" ".zgen/" ".zcompdump.zwc" ".zcompdump-186590d2809f-5.3.1" ".zcompdump-186590d2809f-5.2" ".zcompdump" ".yarnrc" ".wget-hsts" ".vsts/" ".vimrc_background" ".viminfo" ".vim/" ".Trash/" ".tooling/" ".templateengine/" ".subversion/" ".ssh/" ".saves/" ".rvm/" ".rustup/" ".rbenv/" ".python_history" ".pry_history" ".profile" ".post-review-cookies.txt" ".p2/" ".oracle_jre_usage/" ".oh-my-zsh/" ".npm/" ".multirust/" ".mono/" ".mkshrc" ".midway/" ".matplotlib/" ".m2/" ".local/" ".lesshst" ".ideavimrc" ".ideaquicknotes/" ".gitconfig" ".gem/" ".files/" ".emacs.d/" ".eclipse/" ".eclim/" ".DS_Store" ".dotnet/" ".cups/" ".config/" ".cisco/" ".CFUserTextEncoding" ".ce/" ".cargo/" ".cache/" ".bashrc" ".bash_sessions/" ".bash_profile" ".bash_history" ".base16_theme" ".atom/" ".anyconnect" ".android/" ".account" "../" "./")
+
+ ("/Users/obriecon/.emacs.d/" (22987 61065 0 0) "recentf~" "recentf" "network-security.data" "init.el~" "init.el" "ido.last~" "ido.last" "eshell/" "elpa/" "auto-save-list/" ".gitconfig" ".git/" "../" "./")
 
  ("/Users/obriecon/writing/rons_project/" (22986 55335 0 0) "writeup.md~" "writeup.md" "../" "./")
 

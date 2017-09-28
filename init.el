@@ -7,14 +7,17 @@
 	("org" . "Http://orgmode.org/elpa/")))
 
 (package-initialize)
+
+(setq evil-want-C-u-scroll t)
+
 (require 'package)
 (require 'rainbow-delimiters)
 (require 'linum-relative)
 (require 'dashboard)
+(require 'evil)
 
 (add-to-list 'default-frame-alist '(height . 48))
 (add-to-list 'default-frame-alist '(width . 160))
-
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -37,10 +40,12 @@
 (ivy-mode)
 (evil-mode)
 (ido-mode 1)
+(show-paren-mode 1)
 (nyan-mode 1)
 (nyan-start-animation)
 (nyan-toggle-wavy-trail)
-(add-hook 'after-change-major-mode-hook 'fci-mode)
+(fci-mode 1)
+(desktop-save-mode 1)
 (evil-set-initial-state 'eshell-mode 'emacs)
 (dashboard-setup-startup-hook)
 (setq dashboard-startup-banner 'logo)
@@ -48,7 +53,6 @@
 
 (setq ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
-
 (load-theme 'base16-ashes t)
 (setq per-buffer-theme/default-theme 'base16-ashes)
 (setq per-buffer-theme/themes-alist
@@ -60,7 +64,12 @@
 	      ((:theme . gruvbox-dark-hard)
 	       (:modes c-mode c++-mode))
 	      ((:theme . base16-monokai)
-	       (:modes js-mode jsx-mode ruby-mode))))
+	       (:modes js-mode
+		       jsx-mode
+		       ruby-mode
+		       inf-ruby-mode))
+	      ((:theme . base16-greenscreen)
+	       (:modes sh-mode))))
 (setq per-buffer-theme/timer-idle-delay 0.1)
 (per-buffer-theme/enable)
 
@@ -73,17 +82,27 @@
 (global-set-key (kbd "M-f") 'find-file)
 (global-set-key [M-down] 'end-of-defun)
 
-(add-hook 'ruby-mode-hook 'my-web-hook)
-(add-hook 'js-mode-hook 'my-web-hook)
+(add-hook 'ruby-mode-hook 'my-ruby-hook)
 (add-hook 'markdown-mode-hook 'my-markdown-hook)
 (add-hook 'c++-mode-hook 'my-c-hook)
 (add-hook 'c-mode-hook 'my-c-hook)
 (add-hook 'org-mode-hook 'my-erc-hook)
 (add-hook 'erc-mode-hook 'my-erc-hook)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode);
-(add-hook 'dashboard-mode-hook 'turn-off-fci-mode)
+(add-hook 'dashboard-mode-hook 'Turn-off-fci-mode)
+(add-hook 'sh-mode-hook 'my-sh-hook)
 
-(defun my-web-hook ())
+(defun my-sh-hook ()
+  (face-mode-old-school))
+
+(defun my-ruby-hook ()
+  (local-set-key (kbd "C-c s") 'run-rb))
+
+(defun run-rb ()
+  (interactive)
+  (mark-whole-buffer)
+  (ruby-send-block)
+  (keyboard-quit))
 
 (defun my-markdown-hook ()
   (linum-mode 0))
@@ -130,15 +149,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;; '(ansi-term-color-vector
- ;;   ["#ffffff" "#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#81a2be" "#c5c8c6"] t)
+ '(ansi-color-names-vector
+   ["#1c2023" "#c7ae95" "#95c7ae" "#aec795" "#ae95c7" "#c795ae" "#ae95c7" "#c7ccd1"])
+ '(ansi-term-color-vector
+   [unspecified "#1c2023" "#c7ae95" "#95c7ae" "#aec795" "#ae95c7" "#c795ae" "#ae95c7" "#c7ccd1"] t)
  '(custom-safe-themes
    (quote
-    ("b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "760ce657e710a77bcf6df51d97e51aae2ee7db1fba21bbad07aab0fa0f42f834" "82b67c7e21c3b12be7b569af7c84ec0fb2d62105629a173e2479e1053cff94bd" "44c566df0e1dfddc60621711155b1be4665dd3520b290cb354f8270ca57f8788" "aea30125ef2e48831f46695418677b9d676c3babf43959c8e978c0ad672a7329" "100eeb65d336e3d8f419c0f09170f9fd30f688849c5e60a801a1e6addd8216cb" "c968804189e0fc963c641f5c9ad64bca431d41af2fb7e1d01a2a6666376f819c" "3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "cea3ec09c821b7eaf235882e6555c3ffa2fd23de92459751e18f26ad035d2142" "5df96b0536c5d334c1e083f62f5cc7a1e28d056bea82a2eb0d049bc08beadc78" "12670281275ea7c1b42d0a548a584e23b9c4e1d2dabb747fd5e2d692bcd0d39b" "c614d2423075491e6b7f38a4b7ea1c68f31764b9b815e35c9741e9490119efc0" "25c06a000382b6239999582dfa2b81cc0649f3897b394a75ad5a670329600b45" "a4c9e536d86666d4494ef7f43c84807162d9bd29b0dfd39bdf2c3d845dcc7b2e" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" default)))
+    ("4a91a64af7ff1182ed04f7453bb5a4b0c3d82148d27db699df89a5f1d449e2a4" "b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "760ce657e710a77bcf6df51d97e51aae2ee7db1fba21bbad07aab0fa0f42f834" "82b67c7e21c3b12be7b569af7c84ec0fb2d62105629a173e2479e1053cff94bd" "44c566df0e1dfddc60621711155b1be4665dd3520b290cb354f8270ca57f8788" "aea30125ef2e48831f46695418677b9d676c3babf43959c8e978c0ad672a7329" "100eeb65d336e3d8f419c0f09170f9fd30f688849c5e60a801a1e6addd8216cb" "c968804189e0fc963c641f5c9ad64bca431d41af2fb7e1d01a2a6666376f819c" "3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "cea3ec09c821b7eaf235882e6555c3ffa2fd23de92459751e18f26ad035d2142" "5df96b0536c5d334c1e083f62f5cc7a1e28d056bea82a2eb0d049bc08beadc78" "12670281275ea7c1b42d0a548a584e23b9c4e1d2dabb747fd5e2d692bcd0d39b" "c614d2423075491e6b7f38a4b7ea1c68f31764b9b815e35c9741e9490119efc0" "25c06a000382b6239999582dfa2b81cc0649f3897b394a75ad5a670329600b45" "a4c9e536d86666d4494ef7f43c84807162d9bd29b0dfd39bdf2c3d845dcc7b2e" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" default)))
+ '(eclim-executable "/Applications/Eclipse.app/Contents/Eclipse/eclim")
  '(fci-rule-color "#3E4451")
  '(package-selected-packages
    (quote
-    (moe-theme nyan-mode magit dashboard resize-window fill-column-indicator clevercss idea-darkula-theme github-modern-theme linum-relative jsx-mode rainbow-delimiters zenburn-theme ccc bury-successful-compilation projectile gruvbox-theme colemak-evil zenburn counsel swiper ivy per-buffer-theme evil load-theme-buffer-local atom-one-dark-theme color-theme-buffer-local autodisass-java-bytecode json-mode org markdown-mode base16-theme)))
+    (inf-ruby auto-complete restart-emacs moe-theme nyan-mode magit dashboard resize-window fill-column-indicator clevercss idea-darkula-theme github-modern-theme linum-relative jsx-mode rainbow-delimiters zenburn-theme ccc bury-successful-compilation projectile gruvbox-theme colemak-evil zenburn counsel swiper ivy per-buffer-theme evil load-theme-buffer-local atom-one-dark-theme color-theme-buffer-local autodisass-java-bytecode json-mode org markdown-mode base16-theme)))
  '(quote (package-selected-packages (quote (base16-theme)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

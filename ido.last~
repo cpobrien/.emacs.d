@@ -1,0 +1,33 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/obriecon/writing/" . "rons_project/")
+ ("/Users/obriecon/" . "writing/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/obriecon/writing/rons_project/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "writeup.md"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/obriecon/writing/rons_project/" (22986 55335 0 0) "writeup.md~" "writeup.md" "../" "./")
+
+ ("/Users/obriecon/writing/" (22986 38741 0 0) "rons_project/" "../" "./")
+
+ ("/Users/obriecon/Documents/" (22963 7428 0 0) "~$antqo_logging_revised.xlsx" "wtf.webp" "workspace/" "twilio-sms" "scott_recommendation.xlsx" "review.txt" "passport.pdf" "passport.jpg" "nexus_schemas.xlsx" "logging.xlsx" "foo.md" "foo/" "C-wyhyfXYAALcbz.jpg-large" "base16-unikittydark.dark.256.itermcolors" "base16-tomorrow.dark.terminal" "base16-ocean.dark.itermcolors" "base16-grayscalelight.light.itermcolors" "base16-3024.dark.256.itermcolors" "Bar Tracker - Employee Version.docx" "antqo_logging_revised.xlsx" "antqo.pptx" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/obriecon/.emacs.d/" (22986 56371 0 0) "recentf~" "recentf" "network-security.data" "init.el" "elpa/" "auto-save-list/" ".gitconfig" ".git/" "../" "./")
+
+ ("/Users/obriecon/" (22986 54121 0 0) "writing/" "workspace/" "WebstormProjects/" "t/" "RubymineProjects/" "RiderProjects/" "PycharmProjects/" "Public/" "projects/" "project/" "Pictures/" "nvim-osx64/" "nvim-macos.tar.gz" "Music/" "Movies/" "Library/" "init" "IdeaProjects/" "Google Drive/" "git/" "geometry/" "frisk.zsh-theme" "EventsWebsite/" "Downloads/" "Documents/" "Desktop/" "Config" "build/" "brazil-pkg-cache/" "Applications/" "alacritty/" ".zshrc~" ".zshrc.zwc" ".zshrc.pre-oh-my-zsh" ".zshrc" ".zsh_history" ".zsh-update" ".zhistory" ".zgen/" ".zcompdump.zwc" ".zcompdump-186590d2809f-5.3.1" ".zcompdump-186590d2809f-5.2" ".zcompdump" ".yarnrc" ".wget-hsts" ".vsts/" ".vimrc_background" ".viminfo" ".vim/" ".Trash/" ".tooling/" ".templateengine/" ".subversion/" ".ssh/" ".saves/" ".rvm/" ".rustup/" ".rbenv/" ".python_history" ".pry_history" ".profile" ".post-review-cookies.txt" ".p2/" ".oracle_jre_usage/" ".oh-my-zsh/" ".npm/" ".multirust/" ".mono/" ".mkshrc" ".midway/" ".matplotlib/" ".m2/" ".local/" ".lesshst" ".ideavimrc" ".ideaquicknotes/" ".gitconfig" ".gem/" ".files/" ".emacs.d/" ".eclipse/" ".DS_Store" ".dotnet/" ".cups/" ".config/" ".cisco/" ".CFUserTextEncoding" ".ce/" ".cargo/" ".cache/" ".bashrc" ".bash_sessions/" ".bash_profile" ".bash_history" ".base16_theme" ".atom/" ".anyconnect" ".android/" ".account" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

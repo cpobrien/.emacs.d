@@ -3,3 +3,23 @@ ls
 vim
 m
 somet
+somethign
+ls
+cd .emacs.d/
+git status
+git status
+git add -A
+git status
+git rm *~
+git status
+git reset *~
+git status
+git reset auto-save-list/	new file:   elpa/magit-20170913.1424/magit-diff.el
+git status
+clear
+
+git commit -m "last plop of the day"
+git push
+brew cask install eclipse-java
+brew
+make run
