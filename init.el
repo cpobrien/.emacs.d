@@ -30,7 +30,7 @@
 (setq mac-option-modifier nil)
 (setq org-agenda-files (list "~/life.org"))
 
-(set-frame-font "Menlo 12" nil t)
+(set-frame-font "Hack 12" nil t)
 
 ;; All mode preferences
 (scroll-bar-mode -1)
@@ -58,7 +58,7 @@
 (setq ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
 (load-theme 'solarized-light t)
-(setq per-buffer-theme/default-theme 'solarized-light)
+(setq per-buffer-theme/default-theme 'base16-solarized-light)
 (setq per-buffer-theme/themes-alist
 	    '(((:theme . base16-one-light)
 	       (:modes dashboard-mode
@@ -203,7 +203,12 @@
 
 (when (memq window-system '(mac ns))
   (setq ns-use-srgb-colorspace nil))
-(require 'powerline)
-(setq powerline-default-separator (if (display-graphic-p) 'arrow nil))
-(powerline-default-theme)
 
+(require 'telephone-line-config)
+(setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+      telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+      telephone-line-primary-right-separator 'telephone-line-cubed-right
+      telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+(setq telephone-line-height 24
+      telephone-line-evil-use-short-tag t)
+(telephone-line-evil-config)

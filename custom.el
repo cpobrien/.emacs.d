@@ -46,7 +46,7 @@
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (evil-org wanderlust solarized-theme inf-ruby auto-complete restart-emacs moe-theme nyan-mode magit dashboard resize-window fill-column-indicator clevercss idea-darkula-theme github-modern-theme linum-relative jsx-mode rainbow-delimiters zenburn-theme ccc bury-successful-compilation projectile gruvbox-theme colemak-evil zenburn counsel swiper ivy per-buffer-theme evil load-theme-buffer-local atom-one-dark-theme color-theme-buffer-local autodisass-java-bytecode json-mode org markdown-mode base16-theme)))
+    (telephone-line evil-org wanderlust solarized-theme inf-ruby auto-complete restart-emacs moe-theme nyan-mode magit dashboard resize-window fill-column-indicator clevercss idea-darkula-theme github-modern-theme linum-relative jsx-mode rainbow-delimiters zenburn-theme ccc bury-successful-compilation projectile gruvbox-theme colemak-evil zenburn counsel swiper ivy per-buffer-theme evil load-theme-buffer-local atom-one-dark-theme color-theme-buffer-local autodisass-java-bytecode json-mode org markdown-mode base16-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
