@@ -168,6 +168,10 @@
  '(ansi-term-color-vector
    ["#ffffff" "#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#81a2be" "#c5c8c6"] t)
 
+(defun open-list-and-change ()
+  (interactive)
+  (list-buffers)
+  (other-window 1))
 
 (setq initial-frame-alist
       `((background-color . ,(face-background 'default))
@@ -200,6 +204,8 @@
 
 (global-set-key (kbd "M-˙") 'beginning-of-line)
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x C-b") 'open-list-and-change)
+(global-set-key (kbd "C-x k") 'kill-buffer-and-window)
 
 (when (memq window-system '(mac ns))
   (setq ns-use-srgb-colorspace nil))
