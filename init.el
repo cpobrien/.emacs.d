@@ -218,3 +218,6 @@
 (setq telephone-line-height 24
       telephone-line-evil-use-short-tag t)
 (telephone-line-evil-config)
+
+(setq dashboard-items '((recents  . 10)
+			(agenda . 5)))
