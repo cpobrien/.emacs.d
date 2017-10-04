@@ -57,8 +57,8 @@
 
 (setq ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
-(load-theme 'solarized-light t)
-(setq per-buffer-theme/default-theme 'base16-solarized-light)
+(load-theme 'base16-railscasts t)
+(setq per-buffer-theme/default-theme 'base16-railscasts)
 (setq per-buffer-theme/themes-alist
 	    '(((:theme . base16-one-light)
 	       (:modes dashboard-mode
