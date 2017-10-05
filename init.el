@@ -165,9 +165,6 @@
   (save-buffer)
   (load-file "~/.emacs.d/init.el"))
 
- '(ansi-term-color-vector
-   ["#ffffff" "#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#81a2be" "#c5c8c6"] t)
-
 (defun open-list-and-change ()
   (interactive)
   (list-buffers)
@@ -175,14 +172,14 @@
 
 (setq initial-frame-alist
       `((background-color . ,(face-background 'default))
-        (foreground-color . ,(face-foreground 'default))
-        (horizontal-scroll-bars . nil)
-        (vertical-scroll-bars . nil)
-        (menu-bar-lines . 0)
-        (top . 50)      
-        (left . 620)   
-        (cursor-color . "red")
-        (mouse-color . "green")))
+	(foreground-color . ,(face-foreground 'default))
+	(horizontal-scroll-bars . nil)
+	(vertical-scroll-bars . nil)
+	(menu-bar-lines . 0)
+	(top . 50)      
+	(left . 620)   
+	(cursor-color . "red")
+	(mouse-color . "green")))
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 (global-set-key "\C-s" 'swiper)
