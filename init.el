@@ -28,7 +28,7 @@
 
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier nil)
-(setq org-agenda-files (list "~/life.org"))
+(setq org-agenda-files (list "~/work.org" "~/Google Drive/life.org"))
 
 (set-frame-font "Hack 12" nil t)
 
@@ -76,7 +76,7 @@
 		       inf-ruby-mode))
 	      ((:theme . base16-greenscreen)
 	       (:modes sh-mode))
-	      ((:theme . whiteboard)
+	      ((:theme . idea-darkula)
 	       (:modes java-mode))))
 (setq per-buffer-theme/timer-idle-delay 0.1)
 (per-buffer-theme/enable)
@@ -107,6 +107,7 @@
   (shell-command (format "clang %s && ./a.out" (buffer-file-name))))
 
 (defun my-org-mode-hook ()
+  (local-set-key (kbd "C-c a") 'org-todo-list)
   (local-set-key (kbd "C-c t") 'org-todo))
 
 (defun my-eshell-hook ()
