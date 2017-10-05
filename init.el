@@ -221,3 +221,6 @@
 
 (setq dashboard-items '((recents  . 10)
 			(agenda . 5)))
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
