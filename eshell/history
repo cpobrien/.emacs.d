@@ -23,3 +23,19 @@ git push
 brew cask install eclipse-java
 brew
 make run
+rem
+ls
+cd ..
+ls
+rem
+ssh obriecon@obriecon.aka.corp.amazon.com
+ls
+cd home
+ls
+cd obriecon
+ls
+cd ~/
+ls
+exit
+ls
+exit

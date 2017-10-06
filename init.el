@@ -6,6 +6,10 @@
         ("melpa-stable" . "https://stable.melpa.org/packages/")
 	("org" . "Http://orgmode.org/elpa/")))
 
+;; Secret corporate emacs goes here
+(if (file-exists-p "~/.emacs.d/corp.el")
+    (load-file "~/.emacs.d/corp.el"))
+
 (package-initialize)
 (setq evil-want-C-u-scroll t)
 
@@ -101,12 +105,20 @@
 (add-hook 'dashboard-mode-hook 'turn-off-fci-mode)
 (add-hook 'sh-mode-hook 'my-sh-hook)
 
+(defun org-make-subelement ()
+  (interactive)
+  (org-insert-heading-respect-content)
+  (org-demote-subtree)
+  (end-of-line)
+  (evil-insert 1))
+
 (defun cpp-run ()
   (interactive)
   (save-buffer)
   (shell-command (format "clang %s && ./a.out" (buffer-file-name))))
 
 (defun my-org-mode-hook ()
+  (local-set-key (kbd "<M-return>") 'org-make-subelement)
   (local-set-key (kbd "C-c a") 'org-todo-list)
   (local-set-key (kbd "C-c t") 'org-todo))
 
@@ -169,7 +181,7 @@
 (defun open-list-and-change ()
   (interactive)
   (list-buffers)
-  (other-window 1))
+  (switch-to-buffer-other-window "*Buffer List*"))
 
 (setq initial-frame-alist
       `((background-color . ,(face-background 'default))
@@ -222,3 +234,6 @@
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+(setq tramp-default-method "ssh")
+
