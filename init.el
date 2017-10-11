@@ -117,10 +117,21 @@
   (save-buffer)
   (shell-command (format "clang %s && ./a.out" (buffer-file-name))))
 
+;; TODO make these two respect current column position
+(defun backward-same-level ()
+  (interactive)
+  (org-backward-element))
+
+(defun forward-same-level ()
+  (interactive)
+  (org-forward-element))
+
 (defun my-org-mode-hook ()
   (local-set-key (kbd "<M-return>") 'org-make-subelement)
   (local-set-key (kbd "C-c a") 'org-todo-list)
-  (local-set-key (kbd "C-c t") 'org-todo))
+  (local-set-key (kbd "C-c t") 'org-todo)
+  (local-set-key (kbd "C-k") 'backward-same-level)
+  (local-set-key (kbd "C-j") 'forward-same-level))
 
 (defun my-eshell-hook ()
   (linum-mode 0))
