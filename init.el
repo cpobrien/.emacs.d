@@ -205,4 +205,3 @@
           (kill-buffer))))))
 
 (global-set-key (kbd "C-c D")  'delete-file-and-buffer)
-
