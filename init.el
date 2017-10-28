@@ -14,6 +14,7 @@
 (if (file-exists-p "~/other_elisp/corp.el")
     (load-file "~/other_elisp/corp.el"))
 
+(set-frame-font "SF Mono 12" nil t)
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
