@@ -6,22 +6,28 @@
         ("melpa-stable" . "https://stable.melpa.org/packages/")
 	("org" . "Http://orgmode.org/elpa/")))
 
-;; Secret corporate emacs goes here
-(if (file-exists-p "~/.emacs.d/corp.el")
-    (load-file "~/.emacs.d/corp.el"))
-
-
+(require 'desktop)
+(desktop-save-mode 1) 
 (package-initialize)
-(setq evil-want-C-u-scroll t)
+
+;; Secret corporate emacs goes here
+(if (file-exists-p "~/other_elisp/corp.el")
+    (load-file "~/other_elisp/corp.el"))
+
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-(require 'package)
-(require 'rainbow-delimiters)
-(require 'linum-relative)
-(require 'dashboard)
-(require 'evil)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
+
+(invert-face 'default)
+
+(use-package rainbow-delimiters)
 
 (add-to-list 'default-frame-alist '(height . 48))
 (add-to-list 'default-frame-alist '(width . 160))
@@ -35,8 +41,6 @@
 (setq mac-option-modifier nil)
 (setq org-agenda-files (list "~/work.org" "~/Google Drive/life.org"))
 
-(set-frame-font "Hack 12" nil t)
-
 ;; All mode preferences
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -44,55 +48,22 @@
 (scroll-bar-mode -1)
 (fringe-mode -1)
 (global-linum-mode t)
-(linum-relative-on)
 (ivy-mode)
-(evil-mode)
-(server-mode 1)
-(ido-mode 1)
-(show-paren-mode 1)
-(nyan-mode 1)
-(nyan-start-animation)
-(nyan-toggle-wavy-trail)
+(ido-mode 1)(show-paren-mode 1)
 (fci-mode 1)
-(evil-set-initial-state 'eshell-mode 'emacs)
-(dashboard-setup-startup-hook)
 
-(setq dashboard-startup-banner 'logo)
-(setq linum-relative-format " %s ")
-
+(setq linum-format "%s ")
+(setq git-commit-fill-column 80)
 (setq ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
-(load-theme 'base16-railscasts t)
-(setq per-buffer-theme/default-theme 'base16-railscasts)
-(setq per-buffer-theme/themes-alist
-	    '(((:theme . base16-one-light)
-	       (:modes dashboard-mode
-		       erc-mode
-		       erc-list-menu-mode
-		       org-mode
-		       markdown-mode))
-	      ((:theme . gruvbox-dark-hard)
-	       (:modes c-mode c++-mode))
-	      ((:theme . base16-monokai)
-	       (:modes js-mode
-		       jsx-mode
-		       ruby-mode
-		       css-mode
-		       inf-ruby-mode))
-	      ((:theme . base16-greenscreen)
-	       (:modes sh-mode))
-	      ((:theme . idea-darkula)
-	       (:modes java-mode))))
-(setq per-buffer-theme/timer-idle-delay 0.1)
-(per-buffer-theme/enable)
-
+(set-face-attribute 'mode-line nil
+                    :box '(:width 0))
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "C-c c") 'find-user-init-file)
 (global-set-key (kbd "C-c g") 'goto-line-indentation)
 (global-set-key (kbd "C-c r") 'reload-emacs)
 (global-set-key (kbd "C-p") 'clipboard-yank)
 (global-set-key (kbd "C-l") 'switch-to-buffer)
-(global-set-key (kbd "M-f") 'find-file)
 (global-set-key [M-down] 'end-of-defun)
 
 (add-hook 'org-mode-hook 'my-org-mode-hook)
@@ -103,7 +74,6 @@
 (add-hook 'c-mode-hook 'my-c-hook)
 (add-hook 'erc-mode-hook 'my-erc-hook)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode);
-(add-hook 'dashboard-mode-hook 'turn-off-fci-mode)
 (add-hook 'sh-mode-hook 'my-sh-hook)
 
 (defun org-make-subelement ()
@@ -112,7 +82,6 @@
   (org-demote-subtree)
   (end-of-line)
   (evil-insert 1))
-
 (defun cpp-run ()
   (interactive)
   (save-buffer)
@@ -127,12 +96,18 @@
   (interactive)
   (org-forward-element))
 
+(defun custom_org_auto_check()
+  (org-update-checkbox-count t))
+
 (defun my-org-mode-hook ()
   (local-set-key (kbd "<M-return>") 'org-make-subelement)
   (local-set-key (kbd "C-c a") 'org-todo-list)
   (local-set-key (kbd "C-c t") 'org-todo)
-  (local-set-key (kbd "C-k") 'backward-same-level)
-  (local-set-key (kbd "C-j") 'forward-same-level))
+  (local-set-key (kbd "M-k") 'backward-same-level)
+  (local-set-key (kbd "M-j") 'forward-same-level)
+  (local-set-key (kbd "C-c 3") 'org-update-statistics-cookies)
+  (local-set-key (kbd "<return>") ‘org-return-indent)
+  (add-hook 'after-save-hook 'custom_org_auto_check nil 'make-it-local))
 
 (defun my-eshell-hook ()
   (linum-mode 0))
@@ -165,14 +140,10 @@
 
 (defun face-mode-old-school ()
   (interactive)
-  (setq buffer-face-mode-face '(:family "Perfect DOS VGA 437"
-				:height 145))
   (buffer-face-mode))
 
 (defun face-mode-variable ()
   (interactive)
-  (setq buffer-face-mode-face '(:family "SF Pro Text"
-				:height 125))
   (buffer-face-mode))
 
 (defun find-user-init-file ()
@@ -208,6 +179,7 @@
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x C-b") 'open-list-and-change)
 (global-set-key (kbd "C-x k") 'kill-buffer-and-window)
@@ -215,21 +187,22 @@
 (when (memq window-system '(mac ns))
   (setq ns-use-srgb-colorspace nil))
 
-(require 'telephone-line-config)
-(setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-      telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-      telephone-line-primary-right-separator 'telephone-line-cubed-right
-      telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-(setq telephone-line-height 24
-      telephone-line-evil-use-short-tag t)
-(telephone-line-evil-config)
-
-(setq dashboard-items '((recents  . 10)
-			(agenda . 5)))
-
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
-
 (setq tramp-default-method "ssh")
+
+(defun delete-file-and-buffer ()
+  "Kill the current buffer and deletes the file it is visiting."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (when filename
+      (if (vc-backend filename)
+          (vc-delete-file filename)
+        (progn
+          (delete-file filename)
+          (message "Deleted file %s" filename)
+          (kill-buffer))))))
+
+(global-set-key (kbd "C-c D")  'delete-file-and-buffer)
 
