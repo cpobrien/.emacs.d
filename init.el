@@ -63,8 +63,7 @@
 (global-set-key (kbd "C-c c") 'find-user-init-file)
 (global-set-key (kbd "C-c g") 'goto-line-indentation)
 (global-set-key (kbd "C-c r") 'reload-emacs)
-(global-set-key (kbd "C-p") 'clipboard-yank)
-(global-set-key (kbd "C-l") 'switch-to-buffer)
+(global-set-key (kbd "C-b") 'switch-to-buffer)
 (global-set-key [M-down] 'end-of-defun)
 
 (add-hook 'org-mode-hook 'my-org-mode-hook)
