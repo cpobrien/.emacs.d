@@ -184,6 +184,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x C-b") 'open-list-and-change)
 (global-set-key (kbd "C-x k") 'kill-buffer-and-window)
+(global-set-key (kbd "C-d") 'set-mark-command)
 
 (when (memq window-system '(mac ns))
   (setq ns-use-srgb-colorspace nil))
@@ -206,3 +207,9 @@
           (kill-buffer))))))
 
 (global-set-key (kbd "C-c D")  'delete-file-and-buffer)
+
+(defadvice ido-find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+  (unless (and buffer-file-name
+               (file-writable-p buffer-file-name))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
