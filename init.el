@@ -68,13 +68,9 @@
 
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 (add-hook 'eshell-mode-hook 'my-eshell-hook)
-(add-hook 'ruby-mode-hook 'my-ruby-hook)
 (add-hook 'markdown-mode-hook 'my-markdown-hook)
 (add-hook 'c++-mode-hook 'my-c++-hook)
-(add-hook 'c-mode-hook 'my-c-hook)
-(add-hook 'erc-mode-hook 'my-erc-hook)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode);
-(add-hook 'sh-mode-hook 'my-sh-hook)
 
 (defun org-make-subelement ()
   (interactive)
@@ -103,17 +99,14 @@
   (local-set-key (kbd "<M-return>") 'org-make-subelement)
   (local-set-key (kbd "C-c a") 'org-todo-list)
   (local-set-key (kbd "C-c t") 'org-todo)
-  (local-set-key (kbd "M-k") 'backward-same-level)
-  (local-set-key (kbd "M-j") 'forward-same-level)
+  (local-set-key (kbd "M-p") 'backward-same-level)
+  (local-set-key (kbd "M-n") 'forward-same-level)
   (local-set-key (kbd "C-c 3") 'org-update-statistics-cookies)
   (local-set-key (kbd "<return>") ‘org-return-indent)
   (add-hook 'after-save-hook 'custom_org_auto_check nil 'make-it-local))
 
 (defun my-eshell-hook ()
   (linum-mode 0))
-
-(defun my-sh-hook ()
-  (face-mode-old-school))
 
 (defun my-ruby-hook ()
   (set-local-key (kbd "C-c s") 'run-rb))
@@ -128,23 +121,7 @@
   (linum-mode 0))
 
 (defun my-c++-hook ()
-  (local-set-key (kbd "C-c C-c") 'cpp-run)
-  (face-mode-old-school))
-
-(defun my-c-hook()
-  (face-mode-old-school))
-
-(defun my-erc-hook ()
-  (face-mode-variable)
-  (linum-mode 0))
-
-(defun face-mode-old-school ()
-  (interactive)
-  (buffer-face-mode))
-
-(defun face-mode-variable ()
-  (interactive)
-  (buffer-face-mode))
+  (local-set-key (kbd "C-c C-c") 'cpp-run))
 
 (defun find-user-init-file ()
   "Edit the `user-init-file', in another window."
@@ -178,11 +155,12 @@
 	(mouse-color . "green")))
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
+
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x C-b") 'open-list-and-change)
-(global-set-key (kbd "C-x k") 'kill-buffer-and-window)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 (global-set-key (kbd "C-d") 'set-mark-command)
 
 (when (memq window-system '(mac ns))
@@ -212,3 +190,4 @@
   (unless (and buffer-file-name
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
