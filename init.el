@@ -47,19 +47,19 @@
 (tool-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(fringe-mode -1)
 (global-linum-mode t)
 (ivy-mode)
-(ido-mode 1)(show-paren-mode 1)
+(ido-mode 1)
+(show-paren-mode 1)
 (fci-mode 1)
 
-(setq linum-format "%s ")
+(setq linum-format " %s ")
+(set-fringe-mode 0)
 (setq git-commit-fill-column 80)
 (setq ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
 (set-face-attribute 'mode-line nil
                     :box '(:width 0))
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "C-c c") 'find-user-init-file)
 (global-set-key (kbd "C-c g") 'goto-line-indentation)
 (global-set-key (kbd "C-c r") 'reload-emacs)
@@ -160,7 +160,7 @@
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x C-b") 'open-list-and-change)
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "C-x C-k") 'kill-buffer-and-window)
 (global-set-key (kbd "C-d") 'set-mark-command)
 
 (when (memq window-system '(mac ns))
@@ -191,3 +191,10 @@
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
+(defadvice keyboard-escape-quit (around my-keyboard-escape-quit activate)
+  (let (orig-one-window-p)
+    (fset 'orig-one-window-p (symbol-function 'one-window-p))
+    (fset 'one-window-p (lambda (&optional nomini all-frames) t))
+    (unwind-protect
+        ad-do-it
+      (fset 'one-window-p (symbol-function 'orig-one-window-p)))))
