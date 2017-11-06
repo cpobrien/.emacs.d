@@ -198,3 +198,9 @@
     (unwind-protect
         ad-do-it
       (fset 'one-window-p (symbol-function 'orig-one-window-p)))))
+
+(setq ido-ignore-extensions t)
+(setq ido-ignore-buffers '("\\*Messages\\*"))
+
+(windmove-default-keybindings)
+(setq org-replace-disputed-keys t)
