@@ -15,6 +15,9 @@
     (load-file "~/other_elisp/corp.el"))
 
 (set-frame-font "SF Mono 12" nil t)
+(add-hook 'elfeed-show-mode-hook
+	  (lambda () (buffer-face-set "SF Mono 12")))
+
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
@@ -204,3 +207,13 @@
 
 (windmove-default-keybindings)
 (setq org-replace-disputed-keys t)
+(global-set-key (kbd "C-x w") 'elfeed)
+(global-set-key (kbd "C-x j") 'join-line)
+(setq elfeed-feeds
+      '("https://danluu.com/atom.xml"
+	"http://nullprogram.com/feed/"
+	"https://lobste.rs/rss"
+	"http://sachachua.com/blog/feed/"
+	"https://xkcd.com/rss.xml"
+	"https://jvns.ca/atom.xml"
+	"https://eli.thegreenplace.net/feeds/all.atom.xml"))
