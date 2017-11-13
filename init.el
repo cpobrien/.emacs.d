@@ -29,8 +29,6 @@
 (eval-when-compile
   (require 'use-package))
 
-(invert-face 'default)
-
 (use-package rainbow-delimiters)
 
 (add-to-list 'default-frame-alist '(height . 48))
@@ -217,3 +215,5 @@
 	"https://xkcd.com/rss.xml"
 	"https://jvns.ca/atom.xml"
 	"https://eli.thegreenplace.net/feeds/all.atom.xml"))
+
+(load-theme 'gruvbox-dark-hard)
