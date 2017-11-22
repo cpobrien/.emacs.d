@@ -6,10 +6,11 @@
         ("melpa-stable" . "https://stable.melpa.org/packages/")
 	("org" . "Http://orgmode.org/elpa/")))
 
-(require 'desktop)
 (desktop-save-mode 1) 
 (package-initialize)
 
+(require 'desktop)
+(require 'rainbow-delimiters)
 ;; Secret corporate emacs goes here
 (if (file-exists-p "~/other_elisp/corp.el")
     (load-file "~/other_elisp/corp.el"))
@@ -18,30 +19,48 @@
 (add-hook 'elfeed-show-mode-hook
 	  (lambda () (buffer-face-set "SF Mono 12")))
 
-
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq ido-ignore-extensions t)
+(setq ido-ignore-buffers '("\\*Messages\\*"))
+(setq org-replace-disputed-keys t)
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
+(setq org-agenda-files (list "~/work.org" "~/Google Drive/life.org"))
+(setq elfeed-feeds
+      '("https://danluu.com/atom.xml"
+	"http://nullprogram.com/feed/"
+	"https://lobste.rs/rss"
+	"http://sachachua.com/blog/feed/"
+	"https://xkcd.com/rss.xml"
+	"https://jvns.ca/atom.xml"
+	"https://eli.thegreenplace.net/feeds/all.atom.xml"))
+(setq linum-format " %s ")
+(setq git-commit-fill-column 80)
+(setq ring-bell-function 'ignore)
+(setq initial-frame-alist
+      `((background-color . ,(face-background 'default))
+	(foreground-color . ,(face-foreground 'default))
+	(horizontal-scroll-bars . nil)
+	(vertical-scroll-bars . nil)
+	(menu-bar-lines . 0)
+	(top . 50)      
+	(left . 620)
+	(cursor-color . "red")
+	(mouse-color . "green")))
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(setq tramp-default-method "ssh")
+
 (load custom-file 'noerror)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
-(eval-when-compile
-  (require 'use-package))
-
-(use-package rainbow-delimiters)
-
 (add-to-list 'default-frame-alist '(height . 48))
 (add-to-list 'default-frame-alist '(width . 160))
-;; store all backup and autosave files in the tmp dir
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
-(setq org-agenda-files (list "~/work.org" "~/Google Drive/life.org"))
 
 ;; All mode preferences
 (scroll-bar-mode -1)
@@ -54,18 +73,23 @@
 (show-paren-mode 1)
 (fci-mode 1)
 
-(setq linum-format " %s ")
-(set-fringe-mode 0)
-(setq git-commit-fill-column 80)
-(setq ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
 (set-face-attribute 'mode-line nil
                     :box '(:width 0))
 (global-set-key (kbd "C-c c") 'find-user-init-file)
+(global-set-key (kbd "C-o") 'other-window)
 (global-set-key (kbd "C-c g") 'goto-line-indentation)
 (global-set-key (kbd "C-c r") 'reload-emacs)
-(global-set-key (kbd "C-b") 'switch-to-buffer)
 (global-set-key [M-down] 'end-of-defun)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x C-b") 'open-list-and-change)
+(global-set-key (kbd "C-x C-k") 'kill-buffer-and-window)
+(global-set-key (kbd "C-d") 'set-mark-command)
+(global-set-key (kbd "C-x w") 'elfeed)
+(global-set-key (kbd "C-x j") 'join-line)
+(global-set-key (kbd "C-c D")  'delete-file-and-buffer)
 
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 (add-hook 'eshell-mode-hook 'my-eshell-hook)
@@ -79,6 +103,7 @@
   (org-demote-subtree)
   (end-of-line)
   (evil-insert 1))
+
 (defun cpp-run ()
   (interactive)
   (save-buffer)
@@ -144,33 +169,11 @@
   (list-buffers)
   (switch-to-buffer-other-window "*Buffer List*"))
 
-(setq initial-frame-alist
-      `((background-color . ,(face-background 'default))
-	(foreground-color . ,(face-foreground 'default))
-	(horizontal-scroll-bars . nil)
-	(vertical-scroll-bars . nil)
-	(menu-bar-lines . 0)
-	(top . 50)      
-	(left . 620)   
-	(cursor-color . "red")
-	(mouse-color . "green")))
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x C-b") 'open-list-and-change)
-(global-set-key (kbd "C-x C-k") 'kill-buffer-and-window)
-(global-set-key (kbd "C-d") 'set-mark-command)
-
 (when (memq window-system '(mac ns))
   (setq ns-use-srgb-colorspace nil))
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
-
-(setq tramp-default-method "ssh")
 
 (defun delete-file-and-buffer ()
   "Kill the current buffer and deletes the file it is visiting."
@@ -183,8 +186,6 @@
           (delete-file filename)
           (message "Deleted file %s" filename)
           (kill-buffer))))))
-
-(global-set-key (kbd "C-c D")  'delete-file-and-buffer)
 
 (defadvice ido-find-file (after find-file-sudo activate)
   "Find file as root if necessary."
@@ -199,21 +200,22 @@
     (unwind-protect
         ad-do-it
       (fset 'one-window-p (symbol-function 'orig-one-window-p)))))
-
-(setq ido-ignore-extensions t)
-(setq ido-ignore-buffers '("\\*Messages\\*"))
-
 (windmove-default-keybindings)
-(setq org-replace-disputed-keys t)
-(global-set-key (kbd "C-x w") 'elfeed)
-(global-set-key (kbd "C-x j") 'join-line)
-(setq elfeed-feeds
-      '("https://danluu.com/atom.xml"
-	"http://nullprogram.com/feed/"
-	"https://lobste.rs/rss"
-	"http://sachachua.com/blog/feed/"
-	"https://xkcd.com/rss.xml"
-	"https://jvns.ca/atom.xml"
-	"https://eli.thegreenplace.net/feeds/all.atom.xml"))
 
-(load-theme 'gruvbox-dark-hard)
+(defconst my-cc-style
+  '("cc-mode"
+    (c-offsets-alist . ((innamespace . [0])))))
+
+(c-add-style "my-cc-mode" my-cc-style)
+
+(custom-theme-set-faces
+ 'default-black
+ '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "White" :inverse-video nil :box nil :strike-t*hrough nil :overline nil :underline nil :slant normal :weight normal :width normal :height 105))))
+ '(highlight ((((class color) (min-colors 88) (background dark)) (:background "#111111"))))
+ '(region ((nil (:background "#464740"))))
+ '(hl-line ((nil (:background "#222222"))))
+ '(yas-field-highlight-face ((nil (:background "#333399"))))
+ '(js2-function-param-face ((t (:foreground "LightGoldenrod"))))
+ '(font-lock-warning-face ((nil (:foreground "#ff6666"))))
+ '(show-paren-match ((nil (:background "#333399"))))
+ '(show-paren-mismatch ((((class color)) (:background "red")))))
