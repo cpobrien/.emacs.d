@@ -1,3 +1,4 @@
+
 ;; And Stallman said, Let there be light: and there was light.
 (package-initialize)
 (require 'package)
@@ -30,6 +31,8 @@
 (use-package magit)
 (use-package org
   :config
+  (setq org-src-fontify-natively t
+	org-src-tab-acts-natively t)
   (add-hook 'org-mode-hook
 	    (lambda ()
 	      (interactive)
@@ -40,14 +43,20 @@
 (use-package rust-mode)
 (use-package flycheck
   :config
-  (setq flycheck-global-modes '(emacs-lisp-mode c-mode c++-mode rust-mode))
+  (setq flycheck-global-modes '(emacs-lisp-mode c-mode rust-mode))
   (global-flycheck-mode))
 (use-package flycheck-rust
   :after rust-mode
   :config
   (add-hook 'rust-mode-hook #'flycheck-rust-setup))
 (use-package cargo)
-(use-package swiper)
+(use-package ivy
+  :config
+  (ivy-mode)
+  (global-set-key (kbd "M-x") 'counsel-M-x))
+(use-package swiper
+  :config
+  (global-set-key (kbd "C-s") 'swiper))
 (use-package haskell-mode)
 
 ;; erc
@@ -55,9 +64,6 @@
 
 ;; rust
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
-
-;; swiper
-(global-set-key (kbd "C-s") 'swiper)
 
 ;; fix shell
 (exec-path-from-shell-initialize)
@@ -92,7 +98,7 @@
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(package-selected-packages
    (quote
-    (haskell-mode swiper ivy buttercup cargo exec-path-from-shell exec-path-from-shell-initialize flycheck-rust rust-mode flycheck use-package smart-mode-line magit))))
+    (counsel haskell-mode swiper ivy buttercup cargo exec-path-from-shell exec-path-from-shell-initialize flycheck-rust rust-mode flycheck use-package smart-mode-line magit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
