@@ -39,7 +39,9 @@
 	    (lambda ()
 	      (interactive)
 	      (auto-fill-mode))))
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :init
+  (setq exec-path-from-shell-check-startup-files nil))
 (use-package smart-mode-line-powerline-theme)
 (use-package buttercup)
 (use-package rust-mode)
@@ -69,6 +71,7 @@
 (use-package hlinum
   :config
   (hlinum-activate))
+(use-package olivetti)
 
 ;; erc
 (defvar erc-hide-list '("JOIN" "PART" "QUIT"))
@@ -85,7 +88,8 @@
 ;; line numbers
 (defvar linum-format " %d ")
 (global-hl-line-mode)
-(global-linum-mode)
+(add-hook 'text-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'linum-mode)
 
 ;; flycheck
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
@@ -106,6 +110,9 @@
 (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
 (solaire-mode-swap-bg)
 
+;; fix path
+
+
 ;; noise
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -117,7 +124,7 @@
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(package-selected-packages
    (quote
-    (hlinum nlinum solaire-mode doom-themes smart-mode-line-powerline-theme dracula-theme darcula-theme counsel haskell-mode swiper ivy buttercup cargo exec-path-from-shell exec-path-from-shell-initialize flycheck-rust rust-mode flycheck use-package smart-mode-line magit)))
+    (olivetti hlinum nlinum solaire-mode doom-themes smart-mode-line-powerline-theme dracula-theme darcula-theme counsel haskell-mode swiper ivy buttercup cargo exec-path-from-shell exec-path-from-shell-initialize flycheck-rust rust-mode flycheck use-package smart-mode-line magit)))
  '(sml/mode-width
    (if
        (eq
