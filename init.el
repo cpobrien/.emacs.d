@@ -72,6 +72,9 @@
   :config
   (hlinum-activate))
 (use-package olivetti)
+(use-package counsel
+  :config
+  (global-set-key (kbd "M-x") 'counsel-M-x))
 
 ;; erc
 (defvar erc-hide-list '("JOIN" "PART" "QUIT"))
