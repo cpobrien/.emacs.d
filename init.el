@@ -65,13 +65,10 @@
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
   (doom-themes-org-config))
-(use-package solaire-mode
+(use-package solaire-mode)
+(use-package hlinum
   :config
-  (add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
-  (add-hook 'ediff-prepare-buffer-hook #'solaire-mode)
-  (add-hook 'after-revert-hook #'turn-on-solaire-mode)
-  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
-  (solaire-mode-swap-bg))
+  (hlinum-activate))
 
 ;; erc
 (defvar erc-hide-list '("JOIN" "PART" "QUIT"))
@@ -87,7 +84,8 @@
 
 ;; line numbers
 (defvar linum-format " %d ")
-(global-linum-mode 1)
+(global-hl-line-mode)
+(global-linum-mode)
 
 ;; flycheck
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
@@ -101,6 +99,13 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+;; solaire-mode
+(add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
+(add-hook 'ediff-prepare-buffer-hook #'solaire-mode)
+(add-hook 'after-revert-hook #'turn-on-solaire-mode)
+(add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
+(solaire-mode-swap-bg)
+
 ;; noise
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -112,7 +117,7 @@
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(package-selected-packages
    (quote
-    (solaire-mode doom-themes smart-mode-line-powerline-theme dracula-theme darcula-theme counsel haskell-mode swiper ivy buttercup cargo exec-path-from-shell exec-path-from-shell-initialize flycheck-rust rust-mode flycheck use-package smart-mode-line magit)))
+    (hlinum nlinum solaire-mode doom-themes smart-mode-line-powerline-theme dracula-theme darcula-theme counsel haskell-mode swiper ivy buttercup cargo exec-path-from-shell exec-path-from-shell-initialize flycheck-rust rust-mode flycheck use-package smart-mode-line magit)))
  '(sml/mode-width
    (if
        (eq
