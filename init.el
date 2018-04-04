@@ -1,12 +1,14 @@
-
 ;; And Stallman said, Let there be light: and there was light.
 (package-initialize)
 (require 'package)
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")))
+
+(defvar use-package-always-ensure t) ;; I'd like my dependencies to install by default
+
 (require 'use-package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("melpa-stable" . "https://stable.melpa.org/packages/")
-			 ("melpa" . "http://melpa.milkbox.net/packages/")))
-(setq use-package-always-ensure t) ;; I'd like my dependencies to install by default
 
 ;; minimize noise
 (tool-bar-mode -1)
@@ -38,9 +40,10 @@
 	      (interactive)
 	      (auto-fill-mode))))
 (use-package exec-path-from-shell)
-(use-package smart-mode-line)
+(use-package smart-mode-line-powerline-theme)
 (use-package buttercup)
 (use-package rust-mode)
+(use-package smart-mode-line)
 (use-package flycheck
   :config
   (setq flycheck-global-modes '(emacs-lisp-mode c-mode rust-mode))
@@ -52,12 +55,23 @@
 (use-package cargo)
 (use-package ivy
   :config
-  (ivy-mode)
-  (global-set-key (kbd "M-x") 'counsel-M-x))
+  (ivy-mode))
 (use-package swiper
   :config
   (global-set-key (kbd "C-s") 'swiper))
 (use-package haskell-mode)
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+  (doom-themes-org-config))
+(use-package solaire-mode
+  :config
+  (add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
+  (add-hook 'ediff-prepare-buffer-hook #'solaire-mode)
+  (add-hook 'after-revert-hook #'turn-on-solaire-mode)
+  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
+  (solaire-mode-swap-bg))
 
 ;; erc
 (defvar erc-hide-list '("JOIN" "PART" "QUIT"))
@@ -75,11 +89,11 @@
 (defvar linum-format " %d ")
 (global-linum-mode 1)
 
-;; powerline
-(sml/setup)
-
 ;; flycheck
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+
+;; my theme
+(load-theme 'doom-dracula)
 
 ;; emacs function dumping ground
 ;; open init.el
@@ -98,7 +112,75 @@
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(package-selected-packages
    (quote
-    (counsel haskell-mode swiper ivy buttercup cargo exec-path-from-shell exec-path-from-shell-initialize flycheck-rust rust-mode flycheck use-package smart-mode-line magit))))
+    (solaire-mode doom-themes smart-mode-line-powerline-theme dracula-theme darcula-theme counsel haskell-mode swiper ivy buttercup cargo exec-path-from-shell exec-path-from-shell-initialize flycheck-rust rust-mode flycheck use-package smart-mode-line magit)))
+ '(sml/mode-width
+   (if
+       (eq
+	(powerline-current-separator)
+	(quote arrow))
+       (quote right)
+     (quote full)))
+ '(sml/pos-id-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " "
+		  (quote display)
+		  (funcall
+		   (intern
+		    (format "powerline-%s-%s"
+			    (powerline-current-separator)
+			    (car powerline-default-separator-dir)))
+		   (quote powerline-active1)
+		   (quote powerline-active2))))
+     (:propertize " " face powerline-active2))))
+ '(sml/pos-minor-modes-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " "
+		  (quote display)
+		  (funcall
+		   (intern
+		    (format "powerline-%s-%s"
+			    (powerline-current-separator)
+			    (cdr powerline-default-separator-dir)))
+		   (quote powerline-active1)
+		   (quote sml/global))))
+     (:propertize " " face sml/global))))
+ '(sml/pre-id-separator
+   (quote
+    (""
+     (:propertize " " face sml/global)
+     (:eval
+      (propertize " "
+		  (quote display)
+		  (funcall
+		   (intern
+		    (format "powerline-%s-%s"
+			    (powerline-current-separator)
+			    (car powerline-default-separator-dir)))
+		   (quote sml/global)
+		   (quote powerline-active1))))
+     (:propertize " " face powerline-active1))))
+ '(sml/pre-minor-modes-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active2)
+     (:eval
+      (propertize " "
+		  (quote display)
+		  (funcall
+		   (intern
+		    (format "powerline-%s-%s"
+			    (powerline-current-separator)
+			    (cdr powerline-default-separator-dir)))
+		   (quote powerline-active2)
+		   (quote powerline-active1))))
+     (:propertize " " face powerline-active1))))
+ '(sml/pre-modes-separator (propertize " " (quote face) (quote sml/modes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
