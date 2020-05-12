@@ -29,14 +29,6 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier nil)
 (setq org-agenda-files (list "~/work.org" "~/Google Drive/life.org"))
-(setq elfeed-feeds
-      '("https://danluu.com/atom.xml"
-	"http://nullprogram.com/feed/"
-	"https://lobste.rs/rss"
-	"http://sachachua.com/blog/feed/"
-	"https://xkcd.com/rss.xml"
-	"https://jvns.ca/atom.xml"
-	"https://eli.thegreenplace.net/feeds/all.atom.xml"))
 (setq linum-format " %s ")
 (setq git-commit-fill-column 80)
 (setq ring-bell-function 'ignore)
